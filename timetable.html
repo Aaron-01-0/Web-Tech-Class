@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Time Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .lunch {
+            background-color: #dff0d8;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Class Time Table</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>9:00 AM - 10:00 AM</td>
+                <td>Math</td>
+                <td>CRT</td>
+                <td>DSA</td>
+                <td>History</td>
+                <td>Math</td>
+            </tr>
+            <tr>
+                <td>10:00 AM - 11:00 AM</td>
+                <td>Science</td>
+                <td>DSA</td>
+                <td>History</td>
+                <td>Math for AI</td>
+                <td>CRT</td>
+            </tr>
+            <tr>
+                <td>11:00 AM - 12:00 PM</td>
+                <td>DSA</td>
+                <td>Math</td>
+                <td>CRT</td>
+                <td>Web Tech</td>
+                <td>RDBMS</td>
+            </tr>
+            <tr>
+                <td>12:00 PM - 1:00 PM</td>
+                <td colspan="5" class="lunch">Lunch Break</td>
+            </tr>
+            <tr>
+                <td>1:00 PM - 2:00 PM</td>
+                <td>DSA</td>
+                <td>Art</td>
+                <td>Physical Ed.</td>
+                <td>CRT</td>
+                <td>History</td>
+            </tr>
+            <tr>
+                <td>2:00 PM - 3:00 PM</td>
+                <td>Physical Ed.</td>
+                <td>History</td>
+                <td>Math</td>
+                <td>Art</td>
+                <td>DSA</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
