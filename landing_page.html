@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raj | Personal Portfolio</title>
+
+    <!-- Google Fonts (Poppins) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* CSS Variables for Theming */
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --nav-bg: rgba(255, 255, 255, 0.8);
+            --card-bg: #f9f9f9;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --accent-color: #8e44ad;
+            --gradient-start: #4a00e0;
+            --gradient-mid: #8e2de2;
+            --gradient-end: #ff0080;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --nav-bg: rgba(28, 28, 28, 0.85);
+            --card-bg: #1e1e1e;
+            --shadow-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 5px var(--shadow-color);
+            z-index: 1;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-color);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        #home {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+            background-size: 200% 200%;
+            animation: gradient-animation 15s ease infinite;
+        }
+
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-name {
+            font-size: 10vw;
+            font-weight: 700;
+            animation: float-animation 6s ease-in-out infinite;
+        }
+
+        .hero-name h1 {
+            background: linear-gradient(45deg, #fff, #ffdde1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes float-animation {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-25px); }
+        }
+
+        .hero-tagline {
+            font-size: 1.5rem;
+            color: #f0f0f0;
+            margin-top: 1rem;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+        }
+
+        /* General Section Styling */
+        section {
+            padding: 6rem 5%;
+            min-height: 80vh;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--accent-color);
+        }
+
+        /* About Me Section */
+        #about .content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+        #about img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--accent-color);
+            box-shadow: 0 0 20px var(--shadow-color);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+            text-align: center;
+        }
+        .skill-badge {
+            background: var(--card-bg);
+            padding: 1.5rem 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .skill-badge:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px var(--shadow-color);
+        }
+        .skill-badge i {
+            font-size: 3rem;
+            color: var(--accent-color);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+        .project-card .content { padding: 1.5rem; }
+        .project-card h3 { margin-bottom: 0.5rem; }
+        .project-tech {
+            margin: 1rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .project-tech span {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+        .project-links a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            margin-right: 1rem;
+        }
+
+        /* Resume & Contact Section */
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, background 0.3s;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+            background: #9b59b6;
+        }
+        #resume, #contact { text-align: center; }
+        .contact-links {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .contact-links a {
+            font-size: 2.5rem;
+            color: var(--text-color);
+            transition: color 0.3s, transform 0.3s;
+        }
+        .contact-links a:hover {
+            color: var(--accent-color);
+            transform: scale(1.2);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--card-bg);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links { display: none; } /* Hide for hamburger menu */
+            .hero-name { font-size: 18vw; }
+            .hero-tagline { font-size: 1.2rem; }
+            #about .content { flex-direction: column; text-align: center; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="#home" style="text-decoration:none; color: var(--text-color); font-size: 1.5rem; font-weight: 700;">Raj.</a>
+        <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="theme-toggle">
+            <i class="fa-solid fa-moon"></i>
+        </div>
+    </nav>
+
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home">
+            <div class="hero-name"><h1>Raj</h1></div>
+            <p class="hero-tagline">AI & DS Enthusiast | Developer | Tech Explorer</p>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about">
+            <h2 class="section-title">About Me</h2>
+            <div class="content">
+                <img src="Portfolio\landing_page.html" alt="Raj's Photo">
+                <p>Hello! I'm Raj, a passionate developer and technology enthusiast with a strong interest in Artificial Intelligence and Data Science. I love building things that solve real-world problems and am constantly exploring new technologies to expand my skill set. This portfolio showcases some of the projects I've worked on. Let's connect!</p>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2 class="section-title">My Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-badge"><i class="fa-brands fa-python"></i><p>Python</p></div>
+                <div class="skill-badge"><i class="fa-solid fa-brain"></i><p>Machine Learning</p></div>
+                <div class="skill-badge"><i class="fa-brands fa-js"></i><p>JavaScript</p></div>
+                <div class="skill-badge"><i class="fa-brands fa-react"></i><p>React</p></div>
+                <div class="skill-badge"><i class="fa-brands fa-html5"></i><p>Web Dev</p></div>
+                <div class="skill-badge"><i class="fa-solid fa-database"></i><p>SQL</p></div>
+                <div class="skill-badge"><i class="fa-brands fa-git-alt"></i><p>Git & GitHub</p></div>
+                <div class="skill-badge"><i class="fa-solid fa-robot"></i><p>AI</p></div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="content">
+                        <h3>SmartDocs – AI-Powered PDF Chatbot</h3>
+                        <p>An advanced AI-powered assistant that allows users to interact with PDF documents intelligently.</p>
+                        <div class="project-tech"><span>Python</span><span>Meta Llama</span><span>Faiss</span></div>
+                        <div class="project-links"><a href="https://github.com/Arthur-101/SmartDocs" target="_blank">GitHub</a><a href="https://drive.google.com/file/d/1egvaNtaQK7Fy5wQRvmnBPM-ex2jb1ABq/view?usp=sharing" target="_blank">Live Demo</a></div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="content">
+                        <h3>Project Two: Library-Management-System</h3>
+                        <p> Library Management System (LMS) is a comprehensive software solution designed to efficiently manage library operations, catering to both students and administrators.</p>
+                        <div class="project-tech"><span>Python</span><span>SQL</span><span>OS</span></div>
+                        <div class="project-links"><a href="https://github.com/Arthur-101/Library-Management-System" target="_blank">GitHub</a></div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="content">
+                        <h3>Project Three: MTRIX - e-commerce site</h3>
+                        <p>On Hold</p>
+                        <div class="project-tech"><span>Web Dev</span><span>Supabase</span><span>Firebase</span></div>
+                        <div class="project-links"><a href="#" target="_blank">GitHub</a></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resume Section -->
+        <section id="resume">
+            <h2 class="section-title">My Resume</h2>
+            <p>You can view and download my resume by clicking the button below.</p>
+            <br>
+            <a href="https://drive.google.com/file/d/1r7nLKLuSPHeqK23t0cCGs2I4jUHhU_XV/view?usp=sharing" download="Raj-Resume.pdf" class="btn">Download Resume</a>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <h2 class="section-title">Get In Touch</h2>
+            <p>I'm always open to discussing new projects, creative ideas, or opportunities. Feel free to reach out!</p>
+            <div class="contact-links">
+                <a href="mailto:raj00.mkv@gmail.com" target="_blank" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://www.linkedin.com/in/raj-verma-a99823307/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com/Aaron-01-0" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 Raj. Made with Help.</p>
+    </footer>
+
+    <script>
+        // --- Theme Toggler ---
+        const themeToggle = document.querySelector('.theme-toggle');
+        const themeToggleIcon = themeToggle.querySelector('i');
+        const currentTheme = localStorage.getItem('theme');
+
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            if (currentTheme === 'dark') {
+                themeToggleIcon.classList.replace('fa-moon', 'fa-sun');
+            }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const html = document.documentElement;
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.setAttribute('data-theme', 'light');
+                themeToggleIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                themeToggleIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // --- Intersection Observer for Animations & Active Nav Link ---
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => {
+                        link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+
+</body>
+</html>
