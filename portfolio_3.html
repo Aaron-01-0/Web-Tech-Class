@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Raaj — Portfolio</title>
+  <meta name="description" content="Raaj's personal portfolio — Projects, Skills & Contact" />
+  <style>
+    :root{
+      --bg:#0f1724; /* deep navy */
+      --card:#0b1220;
+      --accent1: linear-gradient(135deg,#7c3aed,#06b6d4);
+      --glass: rgba(255,255,255,0.04);
+      --muted: #9aa4b2;
+      --accent:#7c3aed;
+      --maxw:1100px;
+      --radius:14px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,0.09), transparent),
+                  radial-gradient(900px 400px at 90% 90%, rgba(6,182,212,0.06), transparent),
+                  var(--bg);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      padding:32px 20px;
+      display:flex;
+      justify-content:center;
+      align-items:flex-start;
+      font-size:16px;
+    }
+    .wrap{width:100%;max-width:var(--maxw)}
+
+    /* NAV */
+    header{
+      display:flex;justify-content:space-between;align-items:center;margin-bottom:28px;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:52px;height:52px;background:var(--glass);border-radius:12px;display:grid;place-items:center;font-weight:700;color:var(--accent);
+      box-shadow: 0 6px 18px rgba(12,18,30,0.6);
+    }
+    nav{display:flex;gap:18px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px}
+    nav a:hover{color:#fff;background:rgba(255,255,255,0.03)}
+
+    /* hero */
+    .hero{
+      display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-bottom:36px;
+    }
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); border-radius:var(--radius); padding:28px;box-shadow: 0 10px 30px rgba(2,6,23,0.6);}
+    .intro h1{font-size:36px;margin:0 0 8px}
+    .intro p{color:var(--muted);margin:0 0 18px}
+    .cta{display:flex;gap:12px}
+    .btn{padding:10px 16px;border-radius:10px;border:0;cursor:pointer;font-weight:600}
+    .btn-primary{background:var(--accent);color:white;padding:12px 16px}
+    .btn-ghost{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.03)}
+
+    .profile-panel{display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center}
+    .avatar{width:100%;max-width:320px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03);}
+    .avatar .photo{display:block;width:100%;height:320px;background:linear-gradient(180deg,#081226 0%, #08162c 100%);display:grid;place-items:center;color:var(--muted)}
+    .shimmer{background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.05), rgba(255,255,255,0.02));height:6px;border-radius:6px}
+
+    /* sections */
+    section{margin-bottom:28px}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+
+    /* Projects */
+    .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .project{background:var(--card);padding:16px;border-radius:12px;min-height:160px;display:flex;flex-direction:column;justify-content:space-between}
+    .project h4{margin:0;color:#fff}
+    .project p{margin:6px 0 12px;color:var(--muted);font-size:14px}
+    .tags{display:flex;gap:8px;flex-wrap:wrap}
+    .tag{font-size:12px;padding:6px 8px;border-radius:999px;background:rgba(255,255,255,0.03);color:var(--muted)}
+
+    /* Skills */
+    .skill{margin-bottom:12px}
+    .skill .meta{display:flex;justify-content:space-between;margin-bottom:6px;color:var(--muted);font-weight:600}
+    .bar{height:10px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden}
+    .bar > i{display:block;height:100%;background:linear-gradient(90deg,#7c3aed,#06b6d4);border-radius:999px}
+
+    /* Contact */
+    .contact-form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .input, textarea{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:12px;border-radius:10px;color:inherit}
+    textarea{grid-column:1/-1;min-height:120px}
+    .socials{display:flex;gap:12px;align-items:center}
+    .socials a{display:inline-flex;padding:10px;border-radius:10px;background:rgba(255,255,255,0.02);text-decoration:none;color:var(--muted)}
+
+    footer{color:var(--muted);text-align:center;padding:18px 0}
+
+    /* responsiveness */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .projects-grid{grid-template-columns:repeat(2,1fr)}
+      nav{display:none}
+    }
+    @media (max-width:640px){
+      .projects-grid{grid-template-columns:1fr}
+      .grid-2{grid-template-columns:1fr}
+      header{align-items:flex-start}
+      .brand .logo{width:44px;height:44px}
+    }
+
+    /* little animate */
+    .btn-primary{transition:transform .18s ease, box-shadow .18s ease}
+    .btn-primary:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(124,58,237,0.12)}
+    .project{transition:transform .18s ease, box-shadow .18s ease}
+    .project:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(2,6,23,0.6)}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">R</div>
+        <div>
+          <div style="font-weight:700">Raaj</div>
+          <div style="font-size:12px;color:var(--muted)">AI & DS | BTech CSE</div>
+        </div>
+      </div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Connect</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="home" class="hero">
+        <div class="card intro">
+          <h1>Hey — I'm Raaj</h1>
+          <p>Student, AI & DS enthusiast, building cool projects and learning something new every day. Welcome to my portfolio.</p>
+          <div class="cta">
+            <a class="btn btn-primary" href="#projects">See Projects</a>
+            <a class="btn btn-ghost" href="#contact">Connect with me</a>
+          </div>
+
+          <div style="margin-top:20px" class="grid-2">
+            <div class="card" style="background:transparent;padding:12px">
+              <div style="font-size:13px;color:var(--muted)">Current focus</div>
+              <div style="font-weight:700;margin-top:6px">SMARTDOCS & LangChain experiments</div>
+            </div>
+            <div class="card" style="background:transparent;padding:12px">
+              <div style="font-size:13px;color:var(--muted)">Looking for</div>
+              <div style="font-weight:700;margin-top:6px">Internships & collab</div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="card profile-panel">
+          <div class="avatar">
+            <div class="photo"><img src="Img.png" alt = 'Raj' width="100%" height="100%"></div>
+          </div>
+          <div style="font-weight:700">Raaj</div>
+          <div style="color:var(--muted);font-size:14px">BTech CSE | AI & Data Science</div>
+          <div style="width:100%">
+            <div class="shimmer" style="width:70%"></div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="about" class="card">
+        <h2>About Me</h2>
+        <p style="color:var(--muted);margin-top:6px">Hi! I'm Raj — a curious second-year BTech CSE student focused on Artificial Intelligence and Data Science. I enjoy building AI projects, solving problems with code, and learning math behind the models. I also play Valorant when I need a short break 😉</p>
+
+        <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap">
+          <div style="min-width:160px;padding:12px;background:rgba(255,255,255,0.02);border-radius:12px">Location: India</div>
+          <div style="min-width:160px;padding:12px;background:rgba(255,255,255,0.02);border-radius:12px">Education: BTech CSE</div>
+          <div style="min-width:160px;padding:12px;background:rgba(255,255,255,0.02);border-radius:12px">Interests: AI, ML, Web Dev</div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <h2 style="margin-bottom:12px">Projects</h2>
+        <div class="projects-grid">
+          <article class="project">
+            <div>
+              <h4>SMARTDOCS — PDF AI Chatbot</h4>
+              <p>A tool that ingests PDFs, creates embeddings, and answers user queries. Built with LLaMA embeddings and FAISS-like vector store.</p>
+            </div>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">NLP</span>
+              <span class="tag">LLaMA</span>
+            </div>
+          </article>
+
+          <article class="project">
+            <div>
+              <h4>DSA Classes in C</h4>
+              <p>Organized repository of core data structures and algorithms implemented in C — great for practising and teaching.</p>
+            </div>
+            <div class="tags">
+              <span class="tag">C</span>
+              <span class="tag">DSA</span>
+              <span class="tag">GitHub</span>
+            </div>
+          </article>
+
+          <article class="project">
+            <div>
+              <h4>Portfolio Website</h4>
+              <p>This live portfolio built with only HTML & CSS — clean, responsive, and easy to customize.</p>
+            </div>
+            <div class="tags">
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">Responsive</span>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <section id="skills" class="card">
+        <h2>Skills</h2>
+        <div style="margin-top:12px">
+          <div class="skill">
+            <div class="meta"><span>Python</span><span>90%</span></div>
+            <div class="bar"><i style="width:90%"></i></div>
+          </div>
+          <div class="skill">
+            <div class="meta"><span>Machine Learning / AI</span><span>78%</span></div>
+            <div class="bar"><i style="width:78%"></i></div>
+          </div>
+          <div class="skill">
+            <div class="meta"><span>Data Structures (C)</span><span>72%</span></div>
+            <div class="bar"><i style="width:72%"></i></div>
+          </div>
+          <div class="skill">
+            <div class="meta"><span>Web Dev (HTML/CSS/JS)</span><span>65%</span></div>
+            <div class="bar"><i style="width:65%"></i></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" style="margin-bottom:36px">
+        <h2>Connect with me</h2>
+        <div class="card" style="margin-top:12px">
+          <form class="contact-form" onsubmit="event.preventDefault();alert('Thanks! Replace this with real form action.');">
+            <input class="input" placeholder="Your name" required />
+            <input class="input" type="email" placeholder="Your email" required />
+            <input class="input" placeholder="Subject" />
+            <textarea placeholder="Message" required></textarea>
+            <button class="btn btn-primary" style="grid-column:1/-1;justify-self:start">Send message</button>
+          </form>
+
+          <div style="margin-top:16px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap">
+            <div>
+              <div style="font-weight:700">Quick links</div>
+              <div style="color:var(--muted);margin-top:6px">GitHub • LinkedIn • Email</div>
+            </div>
+            <div class="socials">
+              <a href="https://github.com/Aaron-01-0">GitHub</a>
+              <a href="https://www.linkedin.com/in/raj-verma-a99823307/">LinkedIn</a>
+              <a href="mailto:raj00.mkv@gmail.com">Email</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div>Made By Raaj • © <span id="yr"></span></div>
+    </footer>
+
+  </div>
+
+  <script>
+    document.getElementById('yr').innerText = new Date().getFullYear();
+  </script>
+</body>
+</html>
